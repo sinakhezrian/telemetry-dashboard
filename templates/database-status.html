@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database Status</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <div class="px-[12.5%] py-8">
+        {% if status == "success" %}
+        <div class="px-6 py-4 bg-green-300 rounded">
+            <p class="font-bold text-xl">✓ Database connection successful!</p>
+        </div>
+        {% else %}
+        <div class="px-6 py-4 bg-red-300 rounded">
+            <p class="font-bold text-xl">✗ Database connection failed!</p>
+        </div>  
+        {% endif %}
+        <a href="/" class="inline-block mt-4 px-4 py-2 bg-blue-500 text-white rounded">Back to Dashboard</a>
+    </div>
+</body>
+
+</html>
+
+</html>
