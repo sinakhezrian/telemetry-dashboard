@@ -1,3 +1,5 @@
+const socket = io();
+
 function change_status(status) {
   const statusIndicator = document.getElementById("status-indicator");
   const statusText = document.getElementById("status-text");
@@ -13,6 +15,12 @@ function change_status(status) {
   }
 }
 
-() => {
+socket.on("connect", () => {
   change_status(true);
-};
+  console.log("Connected to server");
+});
+
+socket.on("disconnect", () => {
+  change_status(false);
+  console.log("Disconnected from server");
+});
