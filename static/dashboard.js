@@ -42,4 +42,11 @@ socket.on("new_data", (data) => {
   `;
 
   table.insertBefore(newRow, table.firstChild);
+
+  Toastify({
+    text: "New Telemetry Data Received",
+    className: "info",
+    gravity: "bottom", 
+    position: "left",
+  }).showToast();
 });
