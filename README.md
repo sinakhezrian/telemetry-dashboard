@@ -105,8 +105,3 @@ telemetry-dashboard/
 - **Socket.IO** - Real-time communication
 - **Tailwind CSS** - Modern styling
 - **Docker** - Easy deployment
-
-## Made By
-
-[Sina Khezrian](https://github.com/sinakhezrian)
-
