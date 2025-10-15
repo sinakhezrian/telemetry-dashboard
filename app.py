@@ -1,8 +1,8 @@
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
 @app.route('/')
 def dashboard():
-    return "<h1>Telemetry Dashboard</h1>"
+    return render_template('dashboard.html')
  
