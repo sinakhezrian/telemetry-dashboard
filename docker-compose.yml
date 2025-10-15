@@ -3,9 +3,13 @@ services:
   web:
     build: .
     ports:
-      - "5000:5000"
+      - "${PORT:-5000}:${PORT:-5000}"
     environment:
       - DATABASE_URL=postgresql://postgres:12345@db:5432/telemetry
+      - SECRET_KEY=${SECRET_KEY:-your_default_secret_key}
+      - PORT=${PORT:-5000}
+      - FLASK_APP=${FLASK_APP:-app.py}
+      - FLASK_ENV=${FLASK_ENV:-development}
     depends_on:
       - db
     volumes:
