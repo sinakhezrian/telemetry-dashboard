@@ -4,3 +4,4 @@ flask_migrate
 flask-socketio
 python-dotenv
 eventlet
+psycopg2-binary
