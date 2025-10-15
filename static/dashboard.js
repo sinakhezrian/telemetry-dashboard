@@ -24,3 +24,22 @@ socket.on("disconnect", () => {
   change_status(false);
   console.log("Disconnected from server");
 });
+
+socket.on("new_data", (data) => {
+  const table = document.getElementById("telemetry-table");
+  const emptyMessage = document.getElementById("empty-message");
+
+  if (emptyMessage) {
+    emptyMessage.remove();
+  }
+
+  const newRow = document.createElement("tr");
+
+  newRow.innerHTML = `
+    <td class="border border-gray-300 px-4 py-2 text-center">${data.sensor}</td>
+    <td class="border border-gray-300 px-4 py-2 text-center">${data.value}</td>
+    <td class="border border-gray-300 px-4 py-2 text-center">${data.time}</td>
+  `;
+
+  table.insertBefore(newRow, table.firstChild);
+});

@@ -43,7 +43,8 @@ def db_connection_test():
 
 @app.route('/')
 def dashboard():
-    return render_template('dashboard.html')
+    telemetries = Telemetry.query.order_by(Telemetry.created_at.desc()).limit(10).all()
+    return render_template('dashboard.html', telemetries=telemetries)
 
 
 @app.route("/telemetry", methods=["POST"])

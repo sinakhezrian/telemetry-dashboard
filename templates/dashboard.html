@@ -21,22 +21,22 @@
                     <th class="border border-gray-300 px-4 py-2">Time</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="telemetry-table">
+                {% if telemetries %}
+                {% for t in telemetries %}
                 <tr>
-                    <td class="border border-gray-300 px-4 py-2 text-center">CPU Usage</td>
-                    <td class="border border-gray-300 px-4 py-2 text-center">45%</td>
-                    <td class="border border-gray-300 px-4 py-2 text-center">2024-10-01 12:00:00</td>
+                    <td class="border border-gray-300 px-4 py-2 text-center">{{ t.sensor }}</td>
+                    <td class="border border-gray-300 px-4 py-2 text-center">{{ t.value }}</td>
+                    <td class="border border-gray-300 px-4 py-2 text-center">{{ t.created_at }}</td>
                 </tr>
-                <tr class="bg-gray-100">
-                    <td class="border border-gray-300 px-4 py-2 text-center">Memory Usage</td>
-                    <td class="border border-gray-300 px-4 py-2 text-center">3.2 GB</td>
-                    <td class="border border-gray-300 px-4 py-2 text-center">2024-10-01 12:00:00</td>
+                {% endfor %}
+                {% else %}
+                <tr id="empty-message">
+                    <td colspan="3" class="border border-gray-300 px-4 py-8 text-center text-gray-500">
+                        No telemetry data available
+                    </td>
                 </tr>
-                <tr>
-                    <td class="border border-gray-300 px-4 py-2 text-center">Disk I/O</td>
-                    <td class="border border-gray-300 px-4 py-2 text-center">120 MB/s</td>
-                    <td class="border border-gray-300 px-4 py-2 text-center">2024-10-01 12:00:00</td>
-                </tr>
+                {% endif %}
             </tbody>
         </table>
 
