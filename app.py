@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 from dotenv import load_dotenv 
 from flask_migrate import Migrate
 from flask import Flask, render_template, request
@@ -44,7 +45,53 @@ def db_connection_test():
 def dashboard():
     return render_template('dashboard.html')
 
- 
+
+@app.route("/telemetry", methods=["POST"])
+def receive_telemetry():
+    data = request.get_json()
+    
+    # Validation ------>
+    if not data:
+        return {"error": "No data provided"}, 400
+    
+    if "sensor" not in data:
+        return {"error": "Sensor name is reqired"}, 400
+    elif "value" not in data:
+        return {"error": "Value is reqired"}, 400
+    
+    sensor_name = data.get("sensor")
+    time_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    
+    try:
+        for key, val in data.items():
+            if key in ["created_at", "sensor"]:
+                continue
+            
+            try:
+                value = float(val)
+            except (ValueError, TypeError):
+                return {"error": f"Invalid value for {key}: {val}"}, 400
+            
+            entry = Telemetry(
+                sensor=sensor_name,
+                value=value,
+                created_at=time_str
+            )
+            db.session.add(entry)
+        
+        db.session.commit()
+        
+        socketio.emit('new_data', {
+            'sensor': sensor_name,
+            'value': value,
+            'time': time_str
+        })
+        
+        return {"status": "success"}, 200  
+    except Exception as e:
+        db.session.rollback()
+        return {"error": f"Database error: {str(e)}"}, 500
+
  
  
 if __name__ == '__main__':
