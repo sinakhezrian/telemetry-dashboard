@@ -11,15 +11,15 @@
 <body>
     <div class="px-[12.5%] py-8">
         {% if status == "success" %}
-        <div class="px-6 py-4 bg-green-300 rounded">
+        <div class="px-4 py-4 bg-green-300 rounded">
             <p class="font-bold text-xl">✓ Database connection successful!</p>
         </div>
         {% else %}
-        <div class="px-6 py-4 bg-red-300 rounded">
+        <div class="px-4 py-4 bg-red-300 rounded">
             <p class="font-bold text-xl">✗ Database connection failed!</p>
         </div>  
         {% endif %}
-        <a href="/" class="inline-block mt-4 px-4 py-2 bg-blue-500 text-white rounded">Back to Dashboard</a>
+        <a href="/" class="text-blue-500 text-sm">Back to Dashboard</a>
     </div>
 </body>
 
